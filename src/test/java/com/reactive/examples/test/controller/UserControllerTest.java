@@ -1,13 +1,18 @@
 package com.reactive.examples.test.controller;
 
 import com.reactive.examples.model.User;
+import com.reactive.examples.model.UserCapped;
+import com.reactive.examples.repository.UserCappedRepository;
 import com.reactive.examples.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.CollectionOptions;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -17,6 +22,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DirtiesContext
 @AutoConfigureWebTestClient
 @ActiveProfiles("test")
+@Slf4j
 public class UserControllerTest {
 
     @Autowired
@@ -35,6 +42,12 @@ public class UserControllerTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MongoOperations mongoOperations;
+
+    @Autowired
+    private UserCappedRepository userCappedRepository;
 
 
     private List<User> getData(){
@@ -135,5 +148,30 @@ public class UserControllerTest {
                 .body(Mono.just(user),User.class)
                 .exchange()
                 .expectStatus().isBadRequest();
+    }
+
+    @Test
+    public void testStreamUsers(){
+        setUpStreamingData();
+        Flux<UserCapped> userFlux = webTestClient.get().uri("/users/events").exchange()
+                .expectStatus().isOk()
+                .returnResult(UserCapped.class)
+                .getResponseBody()
+                .take(5);
+        StepVerifier.create(userFlux)
+                    .expectNextCount(5)
+                    .verifyComplete();
+    }
+
+    private void setUpStreamingData(){
+        mongoOperations.dropCollection(UserCapped.class);
+        mongoOperations.createCollection(UserCapped.class, CollectionOptions.empty().maxDocuments(20).size(50000).capped());
+        Flux<UserCapped> userCappedFlux = Flux.interval(Duration.ofSeconds(1))
+                .map(i -> new UserCapped(null,"Stream User " + i,20,1000)).take(5);
+
+        userCappedRepository.insert(userCappedFlux)
+                .doOnNext(
+                item -> log.info("UserCapped Inserted from CommandLineRunner " + item))
+                .blockLast();
     }
 }

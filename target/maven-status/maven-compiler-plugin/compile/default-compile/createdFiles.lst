@@ -1,7 +1,11 @@
 com/reactive/examples/initialize/UserInitializer.class
 com/reactive/examples/config/SwaggerConfiguration.class
+com/reactive/examples/repository/UserCappedRepository.class
 com/reactive/examples/ReactiveSpringBootApplication.class
 com/reactive/examples/service/UserService.class
+com/reactive/examples/controller/UserClientController.class
 com/reactive/examples/controller/UserController.class
 com/reactive/examples/repository/UserRepository.class
+com/reactive/examples/model/UserCapped.class
 com/reactive/examples/model/User.class
+com/reactive/examples/client/UserClient.class

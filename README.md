@@ -21,7 +21,7 @@ The server will start at <http://localhost:8080>.
 
 ## Exploring the Rest APIs
 
-The application contains the  following REST APIs
+The application contains the following REST APIs
 
 ```
 1. GET /users - Get All Users
@@ -37,4 +37,6 @@ The application contains the  following REST APIs
 4. GET /users/events - Stream users to a browser as Server-Sent Events
 ```
 It also creates sample data in the database so that it can be tested. It is idempotent in nature.
+
+It also contain a sample WebClient to retrieve data from our User Management application.
 

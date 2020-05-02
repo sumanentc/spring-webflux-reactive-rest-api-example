@@ -1,6 +1,7 @@
 package com.reactive.examples.controller;
 
 import com.reactive.examples.model.User;
+import com.reactive.examples.model.UserCapped;
 import com.reactive.examples.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,7 @@ private UserService userService;
 
     // Users are Sent to the client as Server Sent Events
     @GetMapping(value = "/events", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
-    public Flux<User> streamAllUsers(){
-        return userService.getAllUsers();
+    public Flux<UserCapped> streamAllUsers(){
+        return userService.getStreamedUsers();
     }
 }
