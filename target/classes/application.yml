@@ -4,21 +4,28 @@ spring:
 ---
 spring:
   profiles: dev
-  data.mongodb:
-    host: localhost
-    port: 27017
-    database: local
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/test
+    username: postgres
+    password: postgres
+logging:
+  level:
+    org.springframework.data.r2dbc: Debug
 ---
 spring:
   profiles: test
-  data.mongodb:
-    host: localhost
-    port: 27017
-    database: local
+  r2dbc:
+    url: r2dbc:h2:mem:///test?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    name: sa
+    password:
 ---
 spring:
   profiles: prod
-  data.mongodb:
-    host: localhost
-    port: 27017
-    database: local
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/test
+    username: postgres
+    password: postgres
+  logging:
+    level:
+      org.springframework.data.r2dbc: Debug
+
