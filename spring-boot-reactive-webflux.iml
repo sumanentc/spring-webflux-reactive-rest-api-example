@@ -100,23 +100,30 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.2.6.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.6.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.projectreactor:reactor-test:3.3.5.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.5.20" level="project" />
-    <orderEntry type="library" name="Maven: io.swagger:swagger-models:1.5.20" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.0" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spi:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-core:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-schema:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-common:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.1.7" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-spi:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-schema:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-common:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-annotations:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.83" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-webmvc:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.2.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-metadata:2.0.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.3.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-webflux:3.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.5.20" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger:swagger-models:1.5.20" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.mapstruct:mapstruct:1.3.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-boot-starter:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-oas:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-models:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-data-rest:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-bean-validators:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-spring-webflux:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.springfox:springfox-core:3.0.0" level="project" />
   </component>
 </module>
