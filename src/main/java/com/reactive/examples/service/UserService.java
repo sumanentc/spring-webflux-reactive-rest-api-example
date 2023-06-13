@@ -21,25 +21,28 @@ import java.util.function.BiFunction;
 @Transactional
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    private final DepartmentRepository departmentRepository;
 
-    public Mono<User> createUser(User user){
+    public UserService(UserRepository userRepository, DepartmentRepository departmentRepository) {
+        this.userRepository = userRepository;
+        this.departmentRepository = departmentRepository;
+    }
+
+    public Mono<User> createUser(User user) {
         return userRepository.save(user);
     }
 
-    public Flux<User> getAllUsers(){
+    public Flux<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Mono<User> findById(Integer userId){
+    public Mono<User> findById(Integer userId) {
         return userRepository.findById(userId);
     }
 
-    public Mono<User> updateUser(Integer userId,  User user){
+    public Mono<User> updateUser(Integer userId, User user) {
         return userRepository.findById(userId)
                 .flatMap(dbUser -> {
                     dbUser.setAge(user.getAge());
@@ -48,13 +51,13 @@ public class UserService {
                 });
     }
 
-    public Mono<User> deleteUser(Integer userId){
+    public Mono<User> deleteUser(Integer userId) {
         return userRepository.findById(userId)
                 .flatMap(existingUser -> userRepository.delete(existingUser)
-                .then(Mono.just(existingUser)));
+                        .then(Mono.just(existingUser)));
     }
 
-    public Flux<User> findUsersByAge(int age){
+    public Flux<User> findUsersByAge(int age) {
         return userRepository.findByAge(age);
     }
 
@@ -66,11 +69,11 @@ public class UserService {
                 .ordered((u1, u2) -> u2.getId() - u1.getId());
     }
 
-    private Mono<Department> getDepartmentByUserId(Integer userId){
+    private Mono<Department> getDepartmentByUserId(Integer userId) {
         return departmentRepository.findByUserId(userId);
     }
 
-    public Mono<UserDepartmentDTO> fetchUserAndDepartment(Integer userId){
+    public Mono<UserDepartmentDTO> fetchUserAndDepartment(Integer userId) {
         Mono<User> user = findById(userId).subscribeOn(Schedulers.elastic());
         Mono<Department> department = getDepartmentByUserId(userId).subscribeOn(Schedulers.elastic());
         return Mono.zip(user, department, userDepartmentDTOBiFunction);
