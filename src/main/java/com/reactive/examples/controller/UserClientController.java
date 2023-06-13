@@ -13,24 +13,27 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/client/users")
 public class UserClientController {
 
-    @Autowired
-    private UserClient userClient;
+    private final UserClient userClient;
+
+    public UserClientController(UserClient userClient) {
+        this.userClient = userClient;
+    }
 
     @GetMapping("/{userId}")
-    public Mono<ResponseEntity<User>> getUserById(@PathVariable String userId){
+    public Mono<ResponseEntity<User>> getUserById(@PathVariable String userId) {
         Mono<User> user = userClient.getUser(userId);
-        return user.map( u -> ResponseEntity.ok(u))
+        return user.map(u -> ResponseEntity.ok(u))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public Flux<User> getAllUsers(){
+    public Flux<User> getAllUsers() {
         return userClient.getAllUsers();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<User> create(@RequestBody User user){
+    public Mono<User> create(@RequestBody User user) {
         return userClient.createUser(user);
     }
 
